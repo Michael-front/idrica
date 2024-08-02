@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { AppRouter as App } from "./AppRouter";
 import reportWebVitals from "./reportWebVitals";
 
+import "src/i18next";
 // import "./index.css";
-
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
