@@ -1,5 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const AppRouter: React.FC = () => {
-  return <p>Hello world</p>;
+  const { t } = useTranslation();
+
+  return <p>{t("welcome", { user: "Kal-el" })}</p>;
 };
