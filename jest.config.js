@@ -39,8 +39,8 @@ module.exports = {
     // "\\.module\\.(css|less|scss)$": "identity-obj-proxy",
     "\\.module\\.(css|less|scss)$": "<rootDir>/mocks/styleMock.js",
     "\\.(css|less)$": "identity-obj-proxy",
-    "^@assets/(.*)$": "<rootDir>/src/marvel/adapters/primary/ui/assets/$1",
-    "^@components/(.*)$": "<rootDir>/src/marvel/adapters/primary/ui/components/$1",
+    "^@assets/(.*)$": "<rootDir>/src/postsManager/adapters/primary/ui/assets/$1",
+    "^@components/(.*)$": "<rootDir>/src/postsManager/adapters/primary/ui/components/$1",
   },
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test

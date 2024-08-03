@@ -18,8 +18,8 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
       alias: {
-        '@components': path.resolve(__dirname, 'src/marvel/adapters/primary/ui/components'),
-        '@assets': path.resolve(__dirname, 'src/marvel/adapters/primary/ui/assets'),
+        '@components': path.resolve(__dirname, 'src/postsManager/adapters/primary/ui/components'),
+        '@assets': path.resolve(__dirname, 'src/postsManager/adapters/primary/ui/assets'),
         'src': path.resolve(__dirname, 'src'),
       },
     },

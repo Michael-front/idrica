@@ -4,8 +4,8 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "paths": {
       // "src/*": ["src/*"],
-      "@assets/*": ["src/marvel/adapters/primary/ui/assets/*"],
-      "@components/*": ["src/marvel/adapters/primary/ui/components/*"],
+      "@assets/*": ["src/postsManager/adapters/primary/ui/assets/*"],
+      "@components/*": ["src/postsManager/adapters/primary/ui/components/*"],
     },
     /* language */
     "target": "es5",
