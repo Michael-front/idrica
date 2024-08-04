@@ -1,13 +1,12 @@
 import { Post } from "../entities/Post";
 
-export interface ResponseGetPost {
-  data?: Post[];
+export interface ResponseGetPostAdapter {
+  posts: Post[] | undefined;
   error?: unknown;
   isLoading: boolean;
   isError: boolean;
-  isFetching: boolean;
 }
 
 export interface IPostsManagerApiPort {
-  getPosts: () => ResponseGetPost;
+  useGetPosts(): ResponseGetPostAdapter;
 }
