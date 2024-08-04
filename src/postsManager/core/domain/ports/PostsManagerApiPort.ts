@@ -1,7 +1,7 @@
 import { Post } from "../entities/Post";
 
 export interface ResponseGetPostAdapter {
-  posts: Post[] | undefined;
+  posts: Post[];
   error?: unknown;
   isLoading: boolean;
   isError: boolean;
