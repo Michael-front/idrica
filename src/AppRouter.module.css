@@ -2,14 +2,16 @@
     --primary-color: var(--primary-color-light);
     --secondary-color: var(--secondary-color-light);
     --background-color: var(--background-color-light);
-    --button-color: var(--button-color-light);
     --tertiary-color: var(--tertiary-color-light);
+    --button-color: var(--button-color-light);
+    --button-color-hover: var(--button-color-light-hover);
 }
 
 .app--dark-mode {
     --primary-color: var(--primary-color-dark);
     --secondary-color: var(--secondary-color-dark);
     --background-color: var(--background-color-dark);
-    --button-color: var(--button-color-dark);
     --tertiary-color: var(--tertiary-color-dark);
+    --button-color: var(--button-color-dark);
+    --button-color-hover: var(--button-color-dark-hover);
 }
