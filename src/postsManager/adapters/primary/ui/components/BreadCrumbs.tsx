@@ -17,13 +17,24 @@ const BreadCrumbs = ({ data }: BreadCrumbsProps) => {
     [navigate],
   );
 
+  const renderItem = (index: number, path: string, url: string) => (
+    <span key={index} className={style.breadCrumbs__item} onClick={() => handleClick(url)}>
+      {path}
+    </span>
+  );
+
   return (
     <div className={style.breadCrumbs}>
-      {data.map(({ path, url }, index) => (
-        <span key={index} className={style.breadCrumbs__item} onClick={() => handleClick(url)}>
-          {path}
-        </span>
-      ))}
+      {data.map(({ path, url }, index) =>
+        index === data.length || index === 0 ? (
+          renderItem(index, path, url)
+        ) : (
+          <div key={`container-separator-${index}`}>
+            <span key={`separator-${index}`} className={style.breadCrumbs__separator}>{`>`}</span>
+            {renderItem(index, path, url)}
+          </div>
+        ),
+      )}
     </div>
   );
 };

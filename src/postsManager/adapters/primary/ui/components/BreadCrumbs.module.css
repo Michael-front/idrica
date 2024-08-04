@@ -1,15 +1,17 @@
 .breadCrumbs {
   display: flex;  
   align-items: center;
-  padding: 16px 48px;
- 
+  padding: 16px 48px; 
   font-size: 24px;
+  color: var(--tertiary-color);
+}
+
+.breadCrumbs__separator{
+  margin: 0px 4px;
 }
 
 .breadCrumbs__item {
-  margin-left: 16px;
   font-weight: 800;
-  color: var(--tertiary-color);
 }
 
 .breadCrumbs__item:hover{

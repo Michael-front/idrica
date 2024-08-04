@@ -1,5 +1,5 @@
 {
-    "header":{
+    "header": {
         "welcomeUser": "¡Bienvenido {{user}}!",
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
@@ -7,11 +7,12 @@
             "dark": "Modo oscuro",
             "light": "Modo claro"
         },
-        "menu":{
+        "menu": {
             "allPost": "Inicio: Todos los posts"
         }
     },
-    "breadcrumbs":{
-        "allPost": "Inicio: Todos los posts"
+    "breadcrumbs": {
+        "allPost": "Inicio: Todos los posts",
+        "login": "Iniciar sesión"
     }
 }

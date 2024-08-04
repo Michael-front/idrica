@@ -7,11 +7,12 @@
             "dark": "Dark mode",
             "light": "Light mode"
         },
-        "menu":{
+        "menu": {
             "allPost": "Home: All the posts"
         }
     },
-    "breadcrumbs":{
-        "allPost": "Home: All the posts"
+    "breadcrumbs": {
+        "allPost": "Home: All the posts",
+        "login": "login"
     }
 }
