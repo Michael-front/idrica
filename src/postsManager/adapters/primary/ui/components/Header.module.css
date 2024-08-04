@@ -25,6 +25,18 @@
   font-size: 1em;
   position: relative;
   transition: color 0.3s;
+  flex:2;
+}
+
+
+.header__login{
+  display: flex;
+  justify-content: end;
+  flex:1;
+  text-decoration: none;
+  color: var(--primary-color);
+  position: relative;
+  transition: color 0.3s;  
 }
 
 .header__menu-link::before {
@@ -34,18 +46,22 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: white;
+  background-color: var(--primary-color);
   visibility: hidden;
   transform: scaleX(0);
   transition: all 0.3s ease-in-out;
 }
 
 
+
+.header__login:hover,
 .header__menu-link:hover {
   color: var(--secondary-color);
+  font-weight: 700;
 }
 
 .header__menu-link:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
+

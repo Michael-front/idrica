@@ -14,5 +14,11 @@
     "breadcrumbs": {
         "allPost": "Inicio: Todos los posts",
         "login": "Iniciar sesión"
+    },
+    "login": {
+        "access": "Acceder",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "button": "Iniciar sesión"
     }
 }

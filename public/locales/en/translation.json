@@ -14,5 +14,11 @@
     "breadcrumbs": {
         "allPost": "Home: All the posts",
         "login": "login"
+    },
+    "login": {
+        "access": "Access",
+        "user": "User",
+        "password": "Password",
+        "button": "login"
     }
 }

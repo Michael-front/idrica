@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import LogoIdrica from "@assets/idrica_white-300x70.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import { ROUTES_PATH } from "src/postsManager/config/routes/routes";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,7 @@ interface HeaderProps {
 
 const Header = ({ isLoading }: HeaderProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   const handleLogoClick = useCallback(() => {
@@ -30,6 +31,12 @@ const Header = ({ isLoading }: HeaderProps) => {
             </Link>
           </li>
         </ul>
+
+        {location.pathname !== ROUTES_PATH.LOGIN && (
+          <Link className={style.header__login} to={"/login"}>
+            {t("header.login")}
+          </Link>
+        )}
       </div>
       <Loader isLoading={isLoading} />
     </>

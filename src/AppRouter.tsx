@@ -4,6 +4,7 @@ import { ROUTES_PATH } from "src/postsManager/config/routes/routes";
 import Home from "src/postsManager/adapters/primary/ui/pages/Home";
 import { useSelector } from "react-redux";
 import { selectIsDarkMode } from "src/postsManager/adapters/secondary/redux/themeSlice";
+import Login from "src/postsManager/adapters/primary/ui/pages/Login";
 
 import * as styles from "./AppRouter.module.css";
 
@@ -14,6 +15,7 @@ export const AppRouter: React.FC = () => {
       <Router>
         <Routes>
           <Route path={ROUTES_PATH.HOME} Component={Home} />
+          <Route path={ROUTES_PATH.LOGIN} Component={Login} />
         </Routes>
       </Router>
     </div>
