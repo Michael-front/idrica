@@ -1,0 +1,22 @@
+:root {
+  --border-bottom-width-header: 4px;
+
+  --primary-color-light: #E2DAD6;
+  --secondary-color-light: #F5EDED;
+  --tertiary-color-light: #6482AD;
+  --background-color-light: #35528C;
+  --button-color-light: #294973;
+
+  --primary-color-dark: #D9D9D9;
+  --secondary-color-dark: #737373;
+  --tertiary-color-dark: #092635;
+  --background-color-dark: #0D0D0D;
+  --button-color-dark: #404040;
+}
+
+
+body {
+  margin: auto;
+  font-family: "Roboto Condensed", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}

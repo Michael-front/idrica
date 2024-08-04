@@ -6,7 +6,8 @@ import store from "src/postsManager/adapters/secondary/redux/store";
 import { Provider } from "react-redux";
 import "src/i18next";
 
-// import "./index.css";
+import "./index.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>

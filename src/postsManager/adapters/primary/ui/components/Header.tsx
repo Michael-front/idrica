@@ -16,7 +16,7 @@ const Header = ({ isLoading }: HeaderProps) => {
   const { t } = useTranslation();
 
   const handleLogoClick = useCallback(() => {
-    navigate(ROUTES_PATH.MAIN);
+    navigate(ROUTES_PATH.HOME);
   }, [navigate]);
 
   return (
@@ -25,7 +25,7 @@ const Header = ({ isLoading }: HeaderProps) => {
         <img src={LogoIdrica} alt='logo' onClick={() => handleLogoClick()} />
         <ul className={style.header__menu}>
           <li className={style["header__menu-item"]}>
-            <Link className={style["header__menu-link"]} to={ROUTES_PATH.MAIN}>
+            <Link className={style["header__menu-link"]} to={ROUTES_PATH.HOME}>
               {t("header.menu.allPost")}
             </Link>
           </li>

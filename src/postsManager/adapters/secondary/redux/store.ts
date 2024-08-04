@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import postsApiRTK from "src/postsManager/infrastructure/api/rtkQueryClient/postsApiRTK";
+import themeReducer from "src/postsManager/adapters/secondary/redux/themeSlice";
 
 const store = configureStore({
   reducer: {
+    //
+    theme: themeReducer,
     // Add the generated reducer as a specific top-level slice
     [postsApiRTK.reducerPath]: postsApiRTK.reducer,
   },

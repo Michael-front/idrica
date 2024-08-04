@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header isLoading={isLoading} />
-      <BreadCrumbs data={[{ path: t("breadcrumbs.allPost"), url: ROUTES_PATH.MAIN }]} />
+      <BreadCrumbs data={[{ path: t("breadcrumbs.allPost"), url: ROUTES_PATH.HOME }]} />
       {!isLoading && !isError && (
         <div className={styles.home}>
           {posts?.length && (
