@@ -1,3 +1,17 @@
 {
-    "welcome": "Welcome {{user}}!"
+    "header": {
+        "welcomeUser": "Welcome {{user}}!",
+        "login": "Login",
+        "logout": "Logout",
+        "toggle": {
+            "dark": "Dark mode",
+            "light": "Light mode"
+        },
+        "menu":{
+            "allPost": "Home: All the posts"
+        }
+    },
+    "breadcrumbs":{
+        "allPost": "Home: All the posts"
+    }
 }

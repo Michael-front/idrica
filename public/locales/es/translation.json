@@ -1,3 +1,17 @@
 {
-    "welcome": "!Bienvenido {{user}}!"
+    "header":{
+        "welcomeUser": "¡Bienvenido {{user}}!",
+        "login": "Iniciar sesión",
+        "logout": "Cerrar sesión",
+        "toggle": {
+            "dark": "Modo oscuro",
+            "light": "Modo claro"
+        },
+        "menu":{
+            "allPost": "Inicio: Todos los posts"
+        }
+    },
+    "breadcrumbs":{
+        "allPost": "Inicio: Todos los posts"
+    }
 }
