@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import postsApiRTK from "src/postsManager/infrastructure/api/rtk/postsApiRTK";
+import postsApiRTK from "src/postsManager/infrastructure/api/rtkQueryClient/postsApiRTK";
 
 const store = configureStore({
   reducer: {
