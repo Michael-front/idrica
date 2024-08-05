@@ -31,6 +31,14 @@ export interface ApiResponseUser {
   };
 }
 
+export interface ResponseCommentsByPostId {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
 const postApiRTK = createApi({
   reducerPath: "postApiRTK",
   baseQuery: fetchBaseQuery({ baseUrl: "https://jsonplaceholder.typicode.com/" }),
@@ -43,6 +51,9 @@ const postApiRTK = createApi({
     }),
     getPostByUserId: builder.query<ApiResponsePost[], number>({
       query: (userId) => `posts?userId=${userId}`, // === `/users/${userid}/posts`
+    }),
+    getCommentsByPostId: builder.query<ResponseCommentsByPostId[], number>({
+      query: (postId) => `posts/${postId}/comments`,
     }),
     updatePost: builder.mutation<ApiResponsePost, Partial<ApiResponsePost>>({
       query: ({ id, ...patch }) => ({
@@ -71,6 +82,7 @@ export const {
   useGetPostsQuery,
   useGetUsersQuery,
   useGetPostByUserIdQuery,
+  useGetCommentsByPostIdQuery,
   useUpdatePostMutation,
   useAddPostMutation,
   useDeletePostMutation,

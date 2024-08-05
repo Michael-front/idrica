@@ -41,6 +41,9 @@
         "edit": "Edit",
         "delete": "Delete"
     },
+    "comments":{
+        "button":"View comments ({{count}})"
+    },
     "error": {
         "generic": "An error occurred"
     }

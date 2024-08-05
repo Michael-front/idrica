@@ -41,6 +41,9 @@
         "edit": "Editar",
         "delete": "Eliminar"
     },
+    "comments":{
+        "button":"Ver comentarios ({{count}})"
+    },
     "error": {
         "generic": "Ha ocurrido un error"
     }

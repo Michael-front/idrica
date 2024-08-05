@@ -54,7 +54,6 @@
   display: flex;
 }
 
-.card__action-item {
-  width: 100px;
+.card__action-item {  
   margin-right: 10px;
 }

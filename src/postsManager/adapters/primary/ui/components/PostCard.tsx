@@ -7,6 +7,7 @@ import { useDeleteByIdUseCase } from "src/postsManager/core/application/usesCase
 import { useUpdatePostByIdUseCase } from "src/postsManager/core/application/usesCases/useUpdatePostByIdUsesCase";
 import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
+import { useGetCommentsByPostIdUsesCase } from "../../../../core/application/usesCases/useGetCommentsByPostIdUsesCase";
 
 import * as styles from "./PostCard.module.css";
 
@@ -20,6 +21,8 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
   const deletePost = useDeleteByIdUseCase();
   const updatePost = useUpdatePostByIdUseCase();
 
+  const { comments, isLoading, error, isError } = useGetCommentsByPostIdUsesCase(id);
+
   // const navigate = useNavigate();
 
   // const handleCharacterCardClick = useCallback(() => {
@@ -29,6 +32,7 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
   const handleDelete = useCallback(() => {
     deletePost(id);
   }, [deletePost, id]);
+
   const handleUpdate = useCallback(() => {
     updatePost({ id, title: "Title1", body: "body2", userId: user?.id });
   }, [updatePost, id, user?.id]);
@@ -43,6 +47,11 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
         <div className={styles.card__actions}>
           <Button className={styles["card__action-item"]} label={t("crud.edit")} onClick={handleUpdate} />
           <Button className={styles["card__action-item"]} label={t("crud.delete")} onClick={handleDelete} />
+          <Button
+            className={styles["card__action-item"]}
+            label={t("comments.button", { count: comments.length })}
+            onClick={() => console.log("ver comentarios")}
+          />
         </div>
       )}
     </div>
