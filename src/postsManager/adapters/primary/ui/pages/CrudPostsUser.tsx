@@ -8,7 +8,7 @@ import { Post } from "src/postsManager/core/domain/entities/Post";
 import Filter from "@components/Filter";
 import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
-import { useGetPostByUserIdUseCase } from "../../../../core/application/usesCases/useGetPostsByUserId";
+import { useGetPostByUserIdUseCase } from "src/postsManager/core/application/usesCases/useGetPostsByUserIdUsesCase";
 import Button from "@components/Button";
 
 import * as styles from "./CrudPostsUser.module.css";
