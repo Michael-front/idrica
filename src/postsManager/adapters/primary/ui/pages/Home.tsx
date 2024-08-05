@@ -45,7 +45,7 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      {isError && <>Error: {error instanceof Error ? error.message : "An error occurred"}</>}
+      {isError && <div>Error: {error instanceof Error ? error.message : t("error.generic")}</div>}
     </>
   );
 };

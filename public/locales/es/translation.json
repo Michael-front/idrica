@@ -21,5 +21,8 @@
         "user": "Usuario",
         "password": "Contraseña",
         "button": "Iniciar sesión"
+    },
+    "error": {
+        "generic": "Ha ocurrido un error"
     }
 }

@@ -21,5 +21,8 @@
         "user": "User",
         "password": "Password",
         "button": "login"
+    },
+    "error": {
+        "generic": "An error occurred"
     }
 }
