@@ -1,9 +1,11 @@
 {
     "header": {
-        "welcomeUser": "Welcome {{user}}!",
-        "login": "Login",
-        "logout": "Logout",
-        "config": "Configuration",
+        "user": {
+            "welcomeUser": "Welcome {{user}}!",
+            "login": "Login",
+            "logout": "Logout",
+            "config": "Configuration"
+        },
         "menu": {
             "allPost": "Home: All the posts"
         }

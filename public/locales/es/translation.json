@@ -1,9 +1,11 @@
 {
     "header": {
-        "welcomeUser": "¡Bienvenido {{user}}!",
-        "login": "Iniciar sesión",
-        "logout": "Cerrar sesión",
-        "config": "Configuración",
+        "user": {
+            "welcomeUser": "¡Bienvenido {{user}}!",
+            "login": "Iniciar sesión",
+            "logout": "Cerrar sesión",
+            "config": "Configuración"
+        },
         "menu": {
             "allPost": "Inicio: Todos los posts"
         }

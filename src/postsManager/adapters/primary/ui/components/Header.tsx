@@ -44,7 +44,7 @@ const Header = ({ isLoading }: HeaderProps) => {
 
         {!isAuthenticated && location.pathname !== ROUTES_PATH.LOGIN && (
           <Link className={style.header__login} to={"/login"}>
-            {t("header.login")}
+            {t("header.user.login")}
           </Link>
         )}
 
@@ -55,13 +55,13 @@ const Header = ({ isLoading }: HeaderProps) => {
             onMouseEnter={() => setIsOpenDropDownMenuUSer(true)}
             onMouseLeave={() => setIsOpenDropDownMenuUSer(false)}
           >
-            <span className={style.header__user}>{t("header.welcomeUser", { user: user?.user })} </span>
+            <span className={style.header__user}>{t("header.user.welcomeUser", { user: user?.user })} </span>
             <span className={style["header__user-arrow-down"]} />
 
             {isOpenDropDownMenuUser && (
               <div className={style["header__user-dropdown-menu"]}>
-                <Link to={ROUTES_PATH.SETTINGS}>{t("header.config")}</Link>
-                <a onClick={handleLogout}>{t("header.logout")}</a>
+                <Link to={ROUTES_PATH.SETTINGS}>{t("header.user.config")}</Link>
+                <a onClick={handleLogout}>{t("header.user.logout")}</a>
               </div>
             )}
           </div>
