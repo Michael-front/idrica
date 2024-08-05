@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Header isLoading={false} />
+      <Header isLoading={isLoading} />
       <BreadCrumbs
         data={[
           { path: t("breadcrumbs.allPost"), url: ROUTES_PATH.HOME },
