@@ -1,3 +1,4 @@
+import { ApiResponsePost } from "src/postsManager/infrastructure/api/rtkQueryClient/postsApiRTK";
 import { Post } from "../entities/Post";
 import { User } from "../entities/User";
 
@@ -16,7 +17,6 @@ export interface IPostsManagerApiPort {
   useGetPosts(): ResponseGetPostAdapter;
   useGetUsers(): ResponseGetUserAdapter;
   useGetPostsByUserId(id: number): ResponseGetPostAdapter;
-  // useUpdatePostById(id: number): Promise<Partial<ResponseGetPostAdapter>>;
-  useUpdatePostById(id: number, title?: string, body?: string): Promise<void>;
+  useUpdatePostById(params: Partial<ApiResponsePost>): Promise<void>;
   useDeletePostById(id: number): Promise<void>;
 }

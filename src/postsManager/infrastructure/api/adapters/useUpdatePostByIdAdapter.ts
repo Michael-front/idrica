@@ -1,11 +1,11 @@
 import { IPostsManagerApiPort } from "src/postsManager/core/domain/ports/PostsManagerApiPort";
-import { useUpdatePostMutation } from "../rtkQueryClient/postsApiRTK";
+import { ApiResponsePost, useUpdatePostMutation } from "../rtkQueryClient/postsApiRTK";
 
 export const useUpdatePostByIdAdapter = (): IPostsManagerApiPort["useUpdatePostById"] => {
   const [updatePost] = useUpdatePostMutation();
-  const handleUpdate = async (id: number, title?: string, body?: string) => {
-    await updatePost({ id, title, body });
+  const handleUpdate = async (params: Partial<ApiResponsePost>) => {
+    await updatePost(params);
   };
 
-  return (id: number, title?: string, body?: string) => handleUpdate(id, title, body);
+  return (params: Partial<ApiResponsePost>) => handleUpdate(params);
 };

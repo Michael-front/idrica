@@ -27,7 +27,7 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
     deletePost(id);
   }, [deletePost, id]);
   const handleUpdate = useCallback(() => {
-    updatePost(id, "Title1", "body2");
+    updatePost({ id, title: "Title1", body: "body2" });
   }, [updatePost, id]);
 
   return (
