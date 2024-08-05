@@ -3,6 +3,7 @@
         "welcomeUser": "Welcome {{user}}!",
         "login": "Login",
         "logout": "Logout",
+        "config": "Configuration",
         "toggle": {
             "dark": "Dark mode",
             "light": "Light mode"

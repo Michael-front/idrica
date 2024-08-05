@@ -25,18 +25,16 @@
   font-size: 1em;
   position: relative;
   transition: color 0.3s;
-  flex:2;
+  flex: 2;
 }
 
 
-.header__login{
+.header__login {
   display: flex;
   justify-content: end;
-  flex:1;
+  flex: 1;
   text-decoration: none;
   color: var(--primary-color);
-  position: relative;
-  transition: color 0.3s;  
 }
 
 .header__menu-link::before {
@@ -52,8 +50,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-
-
 .header__login:hover,
 .header__menu-link:hover {
   color: var(--secondary-color);
@@ -65,3 +61,50 @@
   transform: scaleX(1);
 }
 
+.header__user {
+  color: var(--primary-color);
+}
+
+.header__user-menu {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex: 1;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.header__user-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.header__user-dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--secondary-color);
+  transition: background-color 0.3s;
+}
+
+.header__user-dropdown-menu a:hover {
+  background-color: var(--background-color);
+}
+
+.header__user-arrow-down {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--tertiary-color);
+  display: inline-block;
+}
