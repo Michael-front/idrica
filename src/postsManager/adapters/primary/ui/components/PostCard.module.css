@@ -6,8 +6,9 @@
   text-align: center;
   position: relative;
   box-sizing: border-box;
-  height: 200px;
-  padding: 16px 24px;  
+  /* height: 200px; */
+  /* max-height: 400px; */
+  padding: 16px 24px;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
 }
 
@@ -46,4 +47,14 @@
   -webkit-line-clamp: 5;
   line-clamp: 5;
   overflow: hidden;
+  height: 100px
+}
+
+.card__actions {
+  display: flex;
+}
+
+.card__action-item {
+  width: 100px;
+  margin-right: 10px;
 }

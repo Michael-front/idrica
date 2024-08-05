@@ -8,7 +8,7 @@
         },
         "menu": {
             "allPost": "Home: All the posts",
-            "userPost": "My posts"
+            "userPost": "My posts (CRUD)"
         }
     },
     "breadcrumbs": {
@@ -35,6 +35,11 @@
             "spanish": "Spanish",
             "english": "English"
         }
+    },
+    "crud":{
+        "create": "Add",
+        "edit": "Edit",
+        "delete": "Delete"
     },
     "error": {
         "generic": "An error occurred"

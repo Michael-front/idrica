@@ -9,6 +9,7 @@ import Filter from "@components/Filter";
 import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetPostByUserIdUseCase } from "../../../../core/application/usesCases/useGetPostsByUserId";
+import Button from "@components/Button";
 
 import * as styles from "./CrudPostsUser.module.css";
 
@@ -38,9 +39,13 @@ const CrudPostsUser: React.FC = () => {
                 byFields={["title", "body"]}
                 onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
               />
+              <div className={styles["crudPostsUser__container-button-add"]}>
+                <Button label={t("crud.create")} className={styles["crudPostsUser__button-add"]} />
+              </div>
+
               <div className={styles.crudPostsUser__list}>
                 {postsFiltered.map(({ id, title, body }) => (
-                  <PostCard key={id} id={id} title={title} body={body} />
+                  <PostCard key={id} id={id} title={title} body={body} existActions={true} />
                 ))}
               </div>
             </>
