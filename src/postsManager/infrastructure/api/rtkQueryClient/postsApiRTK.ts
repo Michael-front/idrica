@@ -44,8 +44,14 @@ const postApiRTK = createApi({
     getPostByUserId: builder.query<ApiResponsePost[], number>({
       query: (userId) => `posts?userId=${userId}`, // === `/users/${userid}/posts`
     }),
+    deletePost: builder.mutation<{ success: boolean; id: number }, number>({
+      query: (id) => ({
+        url: `posts/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetUsersQuery, useGetPostByUserIdQuery } = postApiRTK;
+export const { useGetPostsQuery, useGetUsersQuery, useGetPostByUserIdQuery, useDeletePostMutation } = postApiRTK;
 export default postApiRTK;

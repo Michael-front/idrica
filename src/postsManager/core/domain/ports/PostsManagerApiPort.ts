@@ -15,5 +15,5 @@ export type ResponseGetUserAdapter = Omit<ResponseGetPostAdapter, "posts"> & {
 export interface IPostsManagerApiPort {
   useGetPosts(): ResponseGetPostAdapter;
   useGetUsers(): ResponseGetUserAdapter;
-  useGetPostsByUserId(): ResponseGetPostAdapter;
+  useDeletePostById(id: number): Promise<void>;
 }
