@@ -44,6 +44,13 @@ const postApiRTK = createApi({
     getPostByUserId: builder.query<ApiResponsePost[], number>({
       query: (userId) => `posts?userId=${userId}`, // === `/users/${userid}/posts`
     }),
+    updatePost: builder.mutation<ApiResponsePost, Partial<ApiResponsePost>>({
+      query: ({ id, ...patch }) => ({
+        url: `posts/${id}`,
+        method: "PATCH",
+        body: patch,
+      }),
+    }),
     deletePost: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
         url: `posts/${id}`,
@@ -53,5 +60,11 @@ const postApiRTK = createApi({
   }),
 });
 
-export const { useGetPostsQuery, useGetUsersQuery, useGetPostByUserIdQuery, useDeletePostMutation } = postApiRTK;
+export const {
+  useGetPostsQuery,
+  useGetUsersQuery,
+  useGetPostByUserIdQuery,
+  useUpdatePostMutation,
+  useDeletePostMutation,
+} = postApiRTK;
 export default postApiRTK;

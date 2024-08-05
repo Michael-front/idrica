@@ -4,6 +4,7 @@ import { Post } from "src/postsManager/core/domain/entities/Post";
 import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import { useDeleteByIdUseCase } from "src/postsManager/core/application/usesCases/useDeletePostByIdUsesCase";
+import { useUpdatePostByIdUseCase } from "src/postsManager/core/application/usesCases/useUpdatePostByIdUsesCase";
 
 import * as styles from "./PostCard.module.css";
 
@@ -14,6 +15,7 @@ type PostCardProps = Post & {
 const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
   const { t } = useTranslation();
   const deletePost = useDeleteByIdUseCase();
+  const updatePost = useUpdatePostByIdUseCase();
 
   // const navigate = useNavigate();
 
@@ -24,6 +26,9 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
   const handleDelete = useCallback(() => {
     deletePost(id);
   }, [deletePost, id]);
+  const handleUpdate = useCallback(() => {
+    updatePost(id, "Title1", "body2");
+  }, [updatePost, id]);
 
   return (
     <div key={id} className={styles.card}>
@@ -33,7 +38,7 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
       </div>
       {existActions && (
         <div className={styles.card__actions}>
-          <Button className={styles["card__action-item"]} label={t("crud.edit")} />
+          <Button className={styles["card__action-item"]} label={t("crud.edit")} onClick={handleUpdate} />
           <Button className={styles["card__action-item"]} label={t("crud.delete")} onClick={handleDelete} />
         </div>
       )}
