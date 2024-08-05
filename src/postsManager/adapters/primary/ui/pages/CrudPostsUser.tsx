@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "@components/Header";
 import PostCard from "@components/PostCard";
 import BreadCrumbs from "@components/BreadCrumbs";
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetPostByUserIdUseCase } from "src/postsManager/core/application/usesCases/useGetPostsByUserIdUsesCase";
 import Button from "@components/Button";
+import { useCreatePostUseCase } from "src/postsManager/core/application/usesCases/useCreatePostUsesCase";
 
 import * as styles from "./CrudPostsUser.module.css";
 
@@ -18,12 +19,17 @@ const CrudPostsUser: React.FC = () => {
   const { posts, error, isLoading, isError } = useGetPostByUserIdUseCase(user!.id); //id must exits
   const [postsFiltered, setPostFiltered] = useState<Post[]>([]);
   const { t } = useTranslation();
+  const createPost = useCreatePostUseCase();
 
   useEffect(() => {
     if (!isLoading && !isError && posts) {
       setPostFiltered(posts);
     }
   }, [isError, isLoading, posts]);
+
+  const handleCreate = useCallback(() => {
+    createPost({ id: 102, title: "createTitle", body: "createBody" });
+  }, [createPost]);
 
   return (
     <>
@@ -40,7 +46,11 @@ const CrudPostsUser: React.FC = () => {
                 onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
               />
               <div className={styles["crudPostsUser__container-button-add"]}>
-                <Button label={t("crud.create")} className={styles["crudPostsUser__button-add"]} />
+                <Button
+                  label={t("crud.create")}
+                  className={styles["crudPostsUser__button-add"]}
+                  onClick={handleCreate}
+                />
               </div>
 
               <div className={styles.crudPostsUser__list}>

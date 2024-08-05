@@ -51,6 +51,13 @@ const postApiRTK = createApi({
         body: patch,
       }),
     }),
+    addPost: builder.mutation<ApiResponsePost, Partial<ApiResponsePost>>({
+      query: (post) => ({
+        url: "posts",
+        method: "POST",
+        body: post,
+      }),
+    }),
     deletePost: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
         url: `posts/${id}`,
@@ -65,6 +72,7 @@ export const {
   useGetUsersQuery,
   useGetPostByUserIdQuery,
   useUpdatePostMutation,
+  useAddPostMutation,
   useDeletePostMutation,
 } = postApiRTK;
 export default postApiRTK;

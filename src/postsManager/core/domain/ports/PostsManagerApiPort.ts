@@ -18,5 +18,6 @@ export interface IPostsManagerApiPort {
   useGetUsers(): ResponseGetUserAdapter;
   useGetPostsByUserId(id: number): ResponseGetPostAdapter;
   useUpdatePostById(params: Partial<ApiResponsePost>): Promise<void>;
+  useCreatePost(params: Partial<ApiResponsePost>): Promise<void>;
   useDeletePostById(id: number): Promise<void>;
 }
