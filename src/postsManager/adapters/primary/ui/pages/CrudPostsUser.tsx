@@ -28,8 +28,8 @@ const CrudPostsUser: React.FC = () => {
   }, [isError, isLoading, posts]);
 
   const handleCreate = useCallback(() => {
-    createPost({ id: 102, title: "createTitle", body: "createBody" });
-  }, [createPost]);
+    createPost({ id: 102, title: "createTitle", body: "createBody", userId: user!.id });
+  }, [createPost, user]);
 
   return (
     <>

@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import { useDeleteByIdUseCase } from "src/postsManager/core/application/usesCases/useDeletePostByIdUsesCase";
 import { useUpdatePostByIdUseCase } from "src/postsManager/core/application/usesCases/useUpdatePostByIdUsesCase";
+import { useSelector } from "react-redux";
+import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 
 import * as styles from "./PostCard.module.css";
 
@@ -13,6 +15,7 @@ type PostCardProps = Post & {
 };
 
 const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
+  const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
   const deletePost = useDeleteByIdUseCase();
   const updatePost = useUpdatePostByIdUseCase();
@@ -27,8 +30,8 @@ const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
     deletePost(id);
   }, [deletePost, id]);
   const handleUpdate = useCallback(() => {
-    updatePost({ id, title: "Title1", body: "body2" });
-  }, [updatePost, id]);
+    updatePost({ id, title: "Title1", body: "body2", userId: user?.id });
+  }, [updatePost, id, user?.id]);
 
   return (
     <div key={id} className={styles.card}>
