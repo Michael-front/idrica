@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { ROUTES_PATH } from "src/postsManager/config/routes/routes";
 import Header from "@components/Header";
@@ -12,11 +12,19 @@ import { toggleTheme } from "src/postsManager/adapters/secondary/redux/themeSlic
 const Settings: React.FC = () => {
   const dispatch = useDispatch();
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const handleToggle = () => {
+  const handleToggleTheme = useCallback(() => {
     dispatch(toggleTheme());
-  };
+  }, [dispatch]);
+
+  const handleLanguageChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      i18n.changeLanguage(event.target.value);
+    },
+    [i18n],
+  );
+
   return (
     <>
       <Header isLoading={false} />
@@ -35,15 +43,29 @@ const Settings: React.FC = () => {
               {isDarkMode ? t("settings.theme.darkMode") : t("settings.theme.lightMode")}
             </span>
             <label className={styles["settings__toggle-switch"]}>
-              <input type='checkbox' checked={isDarkMode} onChange={handleToggle} />
+              <input type='checkbox' checked={isDarkMode} onChange={handleToggleTheme} />
               <span className={styles.settings__slider}></span>
             </label>
           </div>
           <h2 className={styles.settings__subtitle}>{t("settings.language.title")}</h2>
           <div className={styles["settings__radio-group"]}>
-            <input type='radio' id='english' name='language' value='english' />
+            <input
+              type='radio'
+              id='english'
+              name='language'
+              value='en'
+              onChange={handleLanguageChange}
+              checked={i18n.language === "en"}
+            />
             <label htmlFor='english'>{t("settings.language.english")}</label>
-            <input type='radio' id='spanish' name='language' value='spanish' />
+            <input
+              type='radio'
+              id='spanish'
+              name='language'
+              value='es'
+              onChange={handleLanguageChange}
+              checked={i18n.language === "es"}
+            />
             <label htmlFor='spanish'>{t("settings.language.spanish")}</label>
           </div>
         </div>
