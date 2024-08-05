@@ -29,7 +29,7 @@ const Login: React.FC = () => {
 
     if (findUser && findPassword) {
       // The API does not have a path for login, so I use a fake token from which I will obtain the user subsequently.
-      dispatch(setCredentials({ user: findUser, token: `token/user:${findUser.user}` }));
+      dispatch(setCredentials({ user: findUser, token: `token/user:${findUser.user}:${findUser.id}` }));
       navigate(ROUTES_PATH.HOME);
     } else {
       console.error("user not found");

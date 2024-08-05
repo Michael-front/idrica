@@ -15,10 +15,12 @@ const initialState = (): AuthState => {
   const token = Cookies.get("token");
   if (token) {
     //My token is fake so i use it for get my user
-    const user = token.split(":")[1];
+    const dataUserCookie = token.split(":");
+    const user = dataUserCookie[1];
+    const userId = Number(dataUserCookie[2]);
     return {
       isAuthenticated: true,
-      user: { user, email: "", password: "1234" },
+      user: { user, email: "", password: "1234", id: userId },
       token: Cookies.get("token") || null,
       loading: false,
       error: null,
