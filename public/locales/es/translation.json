@@ -7,11 +7,13 @@
             "config": "Configuración"
         },
         "menu": {
-            "allPost": "Inicio: Todos los posts"
+            "allPost": "Inicio: Todos los posts",
+            "userPost": "Mis posts"
         }
     },
     "breadcrumbs": {
         "allPost": "Inicio: Todos los posts",
+        "userPost": "Mis posts",
         "login": "Iniciar sesión",
         "config": "Configuración"
     },

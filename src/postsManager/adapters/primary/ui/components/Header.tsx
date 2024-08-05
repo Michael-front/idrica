@@ -40,6 +40,13 @@ const Header = ({ isLoading }: HeaderProps) => {
               {t("header.menu.allPost")}
             </Link>
           </li>
+          {isAuthenticated && (
+            <li className={style["header__menu-item"]}>
+              <Link className={style["header__menu-link"]} to={ROUTES_PATH.CRUD_POST_USER}>
+                {t("header.menu.userPost")}
+              </Link>
+            </li>
+          )}
         </ul>
 
         {!isAuthenticated && location.pathname !== ROUTES_PATH.LOGIN && (

@@ -41,8 +41,11 @@ const postApiRTK = createApi({
     getUsers: builder.query<ApiResponseUser[], void>({
       query: () => "users",
     }),
+    getPostByUserId: builder.query<ApiResponsePost[], number>({
+      query: (userId) => `posts?userId=${userId}`, // === `/users/${userid}/posts`
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetUsersQuery } = postApiRTK;
+export const { useGetPostsQuery, useGetUsersQuery, useGetPostByUserIdQuery } = postApiRTK;
 export default postApiRTK;

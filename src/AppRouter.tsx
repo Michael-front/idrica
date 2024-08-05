@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Login from "src/postsManager/adapters/primary/ui/pages/Login";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import Settings from "src/postsManager/adapters/primary/ui/pages/Settings";
+import CrudPostsUser from "./postsManager/adapters/primary/ui/pages/CrudPostsUser";
 
 import * as styles from "./AppRouter.module.css";
 
@@ -21,6 +22,7 @@ export const AppRouter: React.FC = () => {
           {isAuthenticated && (
             <>
               <Route path={ROUTES_PATH.SETTINGS} Component={Settings} />
+              <Route path={ROUTES_PATH.CRUD_POST_USER} Component={CrudPostsUser} />
             </>
           )}
           <Route path='*' element={<Navigate to={ROUTES_PATH.HOME} />} />
