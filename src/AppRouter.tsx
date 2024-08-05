@@ -4,7 +4,8 @@ import { ROUTES_PATH } from "src/postsManager/config/routes/routes";
 import Home from "src/postsManager/adapters/primary/ui/pages/Home";
 import { useSelector } from "react-redux";
 import Login from "src/postsManager/adapters/primary/ui/pages/Login";
-import { RootState } from "./postsManager/adapters/secondary/redux/store";
+import { RootState } from "src/postsManager/adapters/secondary/redux/store";
+import Settings from "src/postsManager/adapters/primary/ui/pages/Settings";
 
 import * as styles from "./AppRouter.module.css";
 
@@ -17,6 +18,11 @@ export const AppRouter: React.FC = () => {
         <Routes>
           <Route path={ROUTES_PATH.HOME} Component={Home} />
           {!isAuthenticated && <Route path={ROUTES_PATH.LOGIN} Component={Login} />}
+          {isAuthenticated && (
+            <>
+              <Route path={ROUTES_PATH.SETTINGS} Component={Settings} />
+            </>
+          )}
           <Route path='*' element={<Navigate to={ROUTES_PATH.HOME} />} />
         </Routes>
       </Router>

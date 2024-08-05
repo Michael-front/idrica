@@ -4,23 +4,33 @@
         "login": "Login",
         "logout": "Logout",
         "config": "Configuration",
-        "toggle": {
-            "dark": "Dark mode",
-            "light": "Light mode"
-        },
         "menu": {
             "allPost": "Home: All the posts"
         }
     },
     "breadcrumbs": {
         "allPost": "Home: All the posts",
-        "login": "login"
+        "login": "login",
+        "config": "Configuration"
     },
     "login": {
         "access": "Access",
         "user": "User",
         "password": "Password",
         "button": "login"
+    },
+    "settings": {
+        "title": "Configuración",
+        "theme": {
+            "title": "Change theme",
+            "darkMode": "Dark mode",
+            "lightMode": "Light mode"
+        },
+        "language": {
+            "title": "Change language",
+            "spanish": "Spanish",
+            "english": "English"
+        }
     },
     "error": {
         "generic": "An error occurred"

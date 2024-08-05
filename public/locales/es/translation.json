@@ -4,23 +4,33 @@
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
         "config": "Configuración",
-        "toggle": {
-            "dark": "Modo oscuro",
-            "light": "Modo claro"
-        },
         "menu": {
             "allPost": "Inicio: Todos los posts"
         }
     },
     "breadcrumbs": {
         "allPost": "Inicio: Todos los posts",
-        "login": "Iniciar sesión"
+        "login": "Iniciar sesión",
+        "config": "Configuración"
     },
     "login": {
         "access": "Acceder",
         "user": "Usuario",
         "password": "Contraseña",
         "button": "Iniciar sesión"
+    },
+    "settings": {
+        "title": "Configuración",
+        "theme": {
+            "title": "Cambiar tema",
+            "darkMode": "Modo oscuro",
+            "lightMode": "Modo claro"
+        },
+        "language": {
+            "title": "Cambiar idioma",
+            "spanish": "Español",
+            "english": "Inglés"
+        }
     },
     "error": {
         "generic": "Ha ocurrido un error"
