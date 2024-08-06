@@ -35,19 +35,48 @@ const CrudPostsUser: React.FC = () => {
     setPostFiltered(postsUpdate);
   }, [postsUpdate]);
 
+  const getNewCoutComments = useCallback(
+    (
+      prevData: { data: DataChartColumnsBar[]; sumCountComments: number },
+      indexPost: number,
+      action: "add" | "update" | "delete",
+      countComments = 0,
+    ) => {
+      if (action === "add") {
+        return prevData.sumCountComments + countComments;
+      }
+      if (action === "update") {
+        return dataChar.data[indexPost][1];
+      }
+      //delete
+      const newCountComment = prevData.sumCountComments - prevData.data[indexPost][1];
+      return newCountComment >= 0 ? newCountComment : 0;
+    },
+    [dataChar.data],
+  );
+
+  const getUpdateData = (
+    prevData: { data: DataChartColumnsBar[]; sumCountComments: number },
+    indexPost: number,
+    action: "add" | "update" | "delete",
+    newDataChar: DataChartColumnsBar,
+  ) => {
+    if (action === "add") {
+      return [...prevData.data, newDataChar];
+    }
+    if (action === "update") {
+      return [...prevData.data.slice(0, indexPost), newDataChar, ...prevData.data.slice(indexPost + 1)];
+    }
+    //delete
+    return [...prevData.data.slice(0, indexPost), ...prevData.data.slice(indexPost + 1)];
+  };
+
   const updateDataChart = useCallback(
     (data: Post[], indexPost: number, action: "add" | "update" | "delete", countComments = 0) => {
-      console.log("edit: ", `Post ${indexPost + 1}: "${data[indexPost].title}"`);
-
       setDataChar((prevData) => {
-        const newCountComments =
-          action === "add" ? prevData.sumCountComments + countComments : dataChar.data[indexPost][1];
+        const newCountComments = getNewCoutComments(prevData, indexPost, action, countComments);
         const newDataChar: DataChartColumnsBar = [`Post ${indexPost + 1}: "${data[indexPost].title}"`, countComments];
-
-        const updatedData =
-          action === "add"
-            ? [...prevData.data, newDataChar]
-            : [...prevData.data.slice(0, indexPost), newDataChar, ...prevData.data.slice(indexPost + 1)];
+        const updatedData = getUpdateData(prevData, indexPost, action, newDataChar);
 
         return {
           data: updatedData,
@@ -55,7 +84,7 @@ const CrudPostsUser: React.FC = () => {
         };
       });
     },
-    [dataChar.data],
+    [getNewCoutComments],
   );
 
   return (
@@ -64,66 +93,68 @@ const CrudPostsUser: React.FC = () => {
       <BreadCrumbs data={[{ path: t("breadcrumbs.userPost"), url: ROUTES_PATH.CRUD_POST_USER }]} />
       {!isLoading && !isError && (
         <div className={styles.crudPostsUser}>
-          {postsUpdate.length > 0 && (
-            <>
-              <h1 className={styles.crudPostsUser__title}>{t("crud.statistics.title")}</h1>
-              <ChartColumnsBar
-                title={t("crud.statistics.chart.title", {
-                  countPosts: postsUpdate.length,
-                  countComments: dataChar.sumCountComments,
-                })}
-                yAxisName={t("crud.statistics.chart.yAxisName")}
-                tooltipInitial={t("crud.statistics.chart.tooltipInitial")}
-                data={dataChar.data}
-              />
-              <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
-              <h2 className={styles.crudPostsUser__title}>{t("crud.new")}</h2>
-              <PostCard
-                key='newPost'
-                id={101}
-                title=''
-                body=''
-                modeEdit={true}
-                existActions={true}
-                isNew={true}
-                onUpdatePosts={(dataPost) => {
-                  setPostsUpdate((prevPosts) => [...prevPosts, dataPost]);
-                  updateDataChart([...postsUpdate, dataPost], postsUpdate.length, "add"); //the index is one more [...postsUpdate, dataPost]
-                }}
-              />
-              <Filter
-                data={postsUpdate || []}
-                placeHoder='SEARCH A POST...'
-                byFields={["title", "body"]}
-                onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
-              />
-              <div className={styles.crudPostsUser__list}>
-                {postsFiltered.map(({ id, title, body }, index) => (
-                  <PostCard
-                    key={id}
-                    id={id}
-                    title={title}
-                    body={body}
-                    existActions={true}
-                    setCountComments={(count) => updateDataChart(postsUpdate, index, "add", count)}
-                    onUpdatePosts={(dataPost) => {
-                      let findIndex = 0;
-                      const updatedPostsAux = postsUpdate.map((post, index) => {
-                        if (post.id === dataPost.id) {
-                          findIndex = index;
-                          return { ...post, ...dataPost };
-                        } else {
-                          return post;
-                        }
-                      });
-                      setPostsUpdate(updatedPostsAux);
-                      updateDataChart(updatedPostsAux, findIndex, "update", dataChar.data[findIndex][1]);
-                    }}
-                  />
-                ))}
-              </div>
-            </>
-          )}
+          <>
+            <h1 className={styles.crudPostsUser__title}>{t("crud.statistics.title")}</h1>
+            <ChartColumnsBar
+              title={t("crud.statistics.chart.title", {
+                countPosts: postsUpdate.length,
+                countComments: dataChar.sumCountComments,
+              })}
+              yAxisName={t("crud.statistics.chart.yAxisName")}
+              tooltipInitial={t("crud.statistics.chart.tooltipInitial")}
+              data={dataChar.data}
+            />
+            <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
+            <h2 className={styles.crudPostsUser__title}>{t("crud.new")}</h2>
+            <PostCard
+              key='newPost'
+              id={101}
+              title=''
+              body=''
+              modeEdit={true}
+              existActions={true}
+              isNew={true}
+              onUpdatePosts={(dataPost) => {
+                setPostsUpdate((prevPosts) => [...prevPosts, dataPost]);
+                updateDataChart([...postsUpdate, dataPost], postsUpdate.length, "add"); //the index is one more [...postsUpdate, dataPost]
+              }}
+            />
+            <Filter
+              data={postsUpdate || []}
+              placeHoder='SEARCH A POST...'
+              byFields={["title", "body"]}
+              onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
+            />
+            <div className={styles.crudPostsUser__list}>
+              {postsFiltered.map(({ id, title, body }, index) => (
+                <PostCard
+                  key={id}
+                  id={id}
+                  title={title}
+                  body={body}
+                  existActions={true}
+                  setCountComments={(count) => updateDataChart(postsUpdate, index, "add", count)}
+                  onUpdatePosts={(dataPost) => {
+                    let findIndex = 0;
+                    const updatedPostsAux = postsUpdate.map((post, index) => {
+                      if (post.id === dataPost.id) {
+                        findIndex = index;
+                        return { ...post, ...dataPost };
+                      } else {
+                        return post;
+                      }
+                    });
+                    setPostsUpdate(updatedPostsAux);
+                    updateDataChart(updatedPostsAux, findIndex, "update", dataChar.data[findIndex][1]);
+                  }}
+                  onDeletePost={(postId: number) => {
+                    setPostsUpdate(postsUpdate.filter((post) => post.id !== postId));
+                    updateDataChart(postsUpdate, index, "delete", dataChar.data[index][1]);
+                  }}
+                />
+              ))}
+            </div>
+          </>
         </div>
       )}
 

@@ -18,6 +18,7 @@ type PostCardProps = Post & {
   existActions?: boolean;
   setCountComments?: (countComments: number) => void;
   onUpdatePosts?: (post: Post) => void;
+  onDeletePost?: (idPost: number) => void;
 };
 
 const PostCard = ({
@@ -29,6 +30,7 @@ const PostCard = ({
   modeEdit,
   isNew,
   onUpdatePosts,
+  onDeletePost,
 }: PostCardProps) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
@@ -55,7 +57,8 @@ const PostCard = ({
 
   const handleDelete = useCallback(() => {
     deletePost(id);
-  }, [deletePost, id]);
+    onDeletePost && onDeletePost(id);
+  }, [deletePost, id, onDeletePost]);
 
   const handleUpdate = useCallback(() => {
     const data: ApiResponsePost = { id: id, title: editTitle, body: editBody, userId: user!.id };
