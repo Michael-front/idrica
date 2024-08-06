@@ -119,6 +119,7 @@ const PostCard = ({
                 className={styles["card__action-item"]}
                 label={t("comments.button", { count: comments.length })}
                 onClick={() => console.log("ver comentarios")}
+                disabled={true}
               />
             </>
           )}

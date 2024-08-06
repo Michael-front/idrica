@@ -14,3 +14,7 @@
   background-color: var(--button-color-hover)
 }
 
+.button--disabled{
+  opacity: 50%;
+  pointer-events: none; 
+}
