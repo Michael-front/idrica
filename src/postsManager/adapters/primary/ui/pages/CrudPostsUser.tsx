@@ -21,8 +21,10 @@ const CrudPostsUser: React.FC = () => {
   const [postsFiltered, setPostFiltered] = useState<Post[]>([]);
   const { t } = useTranslation();
   const createPost = useCreatePostUseCase();
-  const [sumCountComments, setSumCountCommets] = useState<number>(0);
-  const [dataChar, setDataChar] = useState<DataChartColumnsBar[]>([]);
+  const [dataChar, setDataChar] = useState<{ data: DataChartColumnsBar[]; sumCountComments: number }>({
+    data: [],
+    sumCountComments: 0,
+  });
 
   useEffect(() => {
     if (!isLoading && !isError && posts) {
@@ -31,10 +33,12 @@ const CrudPostsUser: React.FC = () => {
   }, [isError, isLoading, posts]);
 
   const handleDataChart = (indexPost: number, countComments: number) => {
-    setSumCountCommets((prevCount) => prevCount + countComments);
     const newDataChar: DataChartColumnsBar = [`Post ${indexPost + 1}: "${posts[indexPost].title}"`, countComments];
 
-    setDataChar((prevDataChar) => [...prevDataChar, newDataChar]);
+    setDataChar((prevData) => ({
+      data: [...prevData.data, newDataChar],
+      sumCountComments: prevData.sumCountComments + countComments,
+    }));
   };
 
   const handleCreate = useCallback(() => {
@@ -51,10 +55,13 @@ const CrudPostsUser: React.FC = () => {
             <>
               <h1 className={styles.crudPostsUser__title}>{t("crud.statistics.title")}</h1>
               <ChartColumnsBar
-                title={t("crud.statistics.chart.title", { countPosts: posts.length, countComments: sumCountComments })}
+                title={t("crud.statistics.chart.title", {
+                  countPosts: posts.length,
+                  countComments: dataChar.sumCountComments,
+                })}
                 yAxisName={t("crud.statistics.chart.yAxisName")}
                 tooltipInitial={t("crud.statistics.chart.tooltipInitial")}
-                data={dataChar}
+                data={dataChar.data}
               />
               <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
               <Filter
