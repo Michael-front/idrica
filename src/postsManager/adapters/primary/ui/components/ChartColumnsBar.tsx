@@ -1,6 +1,9 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useSelector } from "react-redux";
+import { RootState } from "src/postsManager/adapters/secondary/redux/store";
+import { BACKGROUND_COLOR_DARK, BACKGROUND_COLOR_LIGHT } from "../../types/constants";
 
 export type DataChartColumnsBar = [string, number];
 
@@ -21,6 +24,8 @@ const ChartColumnsBar = ({
   tooltipInitial,
   data,
 }: ChartColumnsBarProps) => {
+  const { isDarkMode } = useSelector((state: RootState) => state.theme);
+
   const options: Highcharts.Options = {
     chart: {
       type: "column",
@@ -60,7 +65,7 @@ const ChartColumnsBar = ({
       {
         type: "column",
         name: "Population",
-        colors: ["#737373"],
+        colors: [isDarkMode ? BACKGROUND_COLOR_DARK : BACKGROUND_COLOR_LIGHT],
         colorByPoint: true,
         groupPadding: 0,
         data: data,
@@ -88,4 +93,4 @@ const ChartColumnsBar = ({
   );
 };
 
-export default ChartColumnsBar;
+export default React.memo(ChartColumnsBar);
