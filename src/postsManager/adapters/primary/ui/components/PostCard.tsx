@@ -104,4 +104,4 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
   );
 };
 
-export default PostCard;
+export default React.memo(PostCard);
