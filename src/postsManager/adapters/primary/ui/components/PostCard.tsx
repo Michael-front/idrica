@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Post } from "src/postsManager/core/domain/entities/Post";
 import { useTranslation } from "react-i18next";
@@ -13,21 +13,29 @@ import * as styles from "./PostCard.module.css";
 
 type PostCardProps = Post & {
   existActions?: boolean;
+  setCountComments?: (countComments: number) => void;
 };
 
-const PostCard = ({ id, title, body, existActions }: PostCardProps) => {
+const PostCard = ({ id, title, body, existActions, setCountComments }: PostCardProps) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
   const deletePost = useDeleteByIdUseCase();
   const updatePost = useUpdatePostByIdUseCase();
 
-  const { comments, isLoading, error, isError } = useGetCommentsByPostIdUsesCase(id);
+  const { comments, isLoading, isError } = useGetCommentsByPostIdUsesCase(id);
 
   // const navigate = useNavigate();
 
   // const handleCharacterCardClick = useCallback(() => {
   //   navigate(`/post/${id.toString()}`);
   // }, [id, navigate]);
+
+  useEffect(() => {
+    if (!isLoading && !isError && comments) {
+      setCountComments && setCountComments(comments.length);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isError, comments]);
 
   const handleDelete = useCallback(() => {
     deletePost(id);

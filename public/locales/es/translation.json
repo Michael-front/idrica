@@ -36,13 +36,24 @@
             "english": "Inglés"
         }
     },
-    "crud":{
+    "crud": {
         "create": "Añadir",
         "edit": "Editar",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "statistics": {
+            "title": "Estadísticas",
+            "chart": {
+                "title": "Total de comentaritos por cada posts ({{countPosts}} Posts y {{countComments}} comentarios)",
+                "yAxisName": "Total de comentarios",
+                "tooltipInitial": "Comentarios"
+            }
+        },
+        "posts": {
+            "title": "Crud Posts"
+        }
     },
-    "comments":{
-        "button":"Ver comentarios ({{count}})"
+    "comments": {
+        "button": "Ver comentarios ({{count}})"
     },
     "error": {
         "generic": "Ha ocurrido un error"

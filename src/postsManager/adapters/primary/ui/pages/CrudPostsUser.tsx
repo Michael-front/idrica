@@ -11,6 +11,7 @@ import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetPostByUserIdUseCase } from "src/postsManager/core/application/usesCases/useGetPostsByUserIdUsesCase";
 import Button from "@components/Button";
 import { useCreatePostUseCase } from "src/postsManager/core/application/usesCases/useCreatePostUsesCase";
+import ChartColumnsBar, { DataChartColumnsBar } from "@components/ChartColumnsBar";
 
 import * as styles from "./CrudPostsUser.module.css";
 
@@ -20,12 +21,21 @@ const CrudPostsUser: React.FC = () => {
   const [postsFiltered, setPostFiltered] = useState<Post[]>([]);
   const { t } = useTranslation();
   const createPost = useCreatePostUseCase();
+  const [sumCountComments, setSumCountCommets] = useState<number>(0);
+  const [dataChar, setDataChar] = useState<DataChartColumnsBar[]>([]);
 
   useEffect(() => {
     if (!isLoading && !isError && posts) {
       setPostFiltered(posts);
     }
   }, [isError, isLoading, posts]);
+
+  const handleDataChart = (indexPost: number, countComments: number) => {
+    setSumCountCommets((prevCount) => prevCount + countComments);
+    const newDataChar: DataChartColumnsBar = [`Post ${indexPost + 1}: "${posts[indexPost].title}"`, countComments];
+
+    setDataChar((prevDataChar) => [...prevDataChar, newDataChar]);
+  };
 
   const handleCreate = useCallback(() => {
     createPost({ id: 102, title: "createTitle", body: "createBody", userId: user!.id });
@@ -39,6 +49,14 @@ const CrudPostsUser: React.FC = () => {
         <div className={styles.crudPostsUser}>
           {posts.length > 0 && (
             <>
+              <h1 className={styles.crudPostsUser__title}>{t("crud.statistics.title")}</h1>
+              <ChartColumnsBar
+                title={t("crud.statistics.chart.title", { countPosts: posts.length, countComments: sumCountComments })}
+                yAxisName={t("crud.statistics.chart.yAxisName")}
+                tooltipInitial={t("crud.statistics.chart.tooltipInitial")}
+                data={dataChar}
+              />
+              <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
               <Filter
                 data={posts || []}
                 placeHoder='SEARCH A POST...'
@@ -54,8 +72,15 @@ const CrudPostsUser: React.FC = () => {
               </div>
 
               <div className={styles.crudPostsUser__list}>
-                {postsFiltered.map(({ id, title, body }) => (
-                  <PostCard key={id} id={id} title={title} body={body} existActions={true} />
+                {postsFiltered.map(({ id, title, body }, index) => (
+                  <PostCard
+                    key={id}
+                    id={id}
+                    title={title}
+                    body={body}
+                    existActions={true}
+                    setCountComments={(count) => handleDataChart(index, count)}
+                  />
                 ))}
               </div>
             </>

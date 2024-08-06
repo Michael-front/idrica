@@ -10,6 +10,10 @@
   gap: 16px;
 }
 
+.crudPostsUser__title{
+  color: var(--tertiary-color);
+  margin-bottom: 16px;
+}
 
 .crudPostsUser__container-button-add{
   display: flex;
