@@ -37,6 +37,8 @@
         }
     },
     "crud": {
+        "new": "Nuevo",
+        "save": "Guardar",
         "create": "Añadir",
         "edit": "Editar",
         "delete": "Eliminar",

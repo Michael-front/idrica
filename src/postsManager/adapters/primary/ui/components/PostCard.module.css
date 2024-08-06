@@ -50,6 +50,30 @@
   height: 100px
 }
 
+
+.card__title_input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+}
+
+.card__body_input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  resize: none;
+  height: 100px;
+}
+
+
 .card__actions {
   display: flex;
 }

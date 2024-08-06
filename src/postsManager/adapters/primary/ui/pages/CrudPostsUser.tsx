@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@components/Header";
 import PostCard from "@components/PostCard";
 import BreadCrumbs from "@components/BreadCrumbs";
@@ -9,8 +9,6 @@ import Filter from "@components/Filter";
 import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetPostByUserIdUseCase } from "src/postsManager/core/application/usesCases/useGetPostsByUserIdUsesCase";
-import Button from "@components/Button";
-import { useCreatePostUseCase } from "src/postsManager/core/application/usesCases/useCreatePostUsesCase";
 import ChartColumnsBar, { DataChartColumnsBar } from "@components/ChartColumnsBar";
 
 import * as styles from "./CrudPostsUser.module.css";
@@ -20,7 +18,6 @@ const CrudPostsUser: React.FC = () => {
   const { posts, error, isLoading, isError } = useGetPostByUserIdUseCase(user!.id); //id must exits
   const [postsFiltered, setPostFiltered] = useState<Post[]>([]);
   const { t } = useTranslation();
-  const createPost = useCreatePostUseCase();
   const [dataChar, setDataChar] = useState<{ data: DataChartColumnsBar[]; sumCountComments: number }>({
     data: [],
     sumCountComments: 0,
@@ -41,10 +38,6 @@ const CrudPostsUser: React.FC = () => {
     }));
   };
 
-  const handleCreate = useCallback(() => {
-    createPost({ id: 102, title: "createTitle", body: "createBody", userId: user!.id });
-  }, [createPost, user]);
-
   return (
     <>
       <Header isLoading={isLoading} />
@@ -64,20 +57,14 @@ const CrudPostsUser: React.FC = () => {
                 data={dataChar.data}
               />
               <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
+              <h2 className={styles.crudPostsUser__title}>{t("crud.new")}</h2>
+              <PostCard key='newPost' id={101} title='' body='' modeEdit={true} existActions={true} isNew={true} />
               <Filter
                 data={posts || []}
                 placeHoder='SEARCH A POST...'
                 byFields={["title", "body"]}
                 onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
               />
-              <div className={styles["crudPostsUser__container-button-add"]}>
-                <Button
-                  label={t("crud.create")}
-                  className={styles["crudPostsUser__button-add"]}
-                  onClick={handleCreate}
-                />
-              </div>
-
               <div className={styles.crudPostsUser__list}>
                 {postsFiltered.map(({ id, title, body }, index) => (
                   <PostCard

@@ -15,16 +15,6 @@
   margin-bottom: 16px;
 }
 
-.crudPostsUser__container-button-add{
-  display: flex;
-  justify-content: right;
-}
-
-.crudPostsUser__button-add{
-  width: 100px;
-  margin-bottom: 16px;
-}
-
 
 
 @media (min-width: 1367px) and (max-width: 1920px) {
