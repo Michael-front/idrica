@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "@components/Header";
 import PostCard from "@components/PostCard";
 import BreadCrumbs from "@components/BreadCrumbs";
@@ -16,6 +16,7 @@ import * as styles from "./CrudPostsUser.module.css";
 const CrudPostsUser: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { posts, error, isLoading, isError } = useGetPostByUserIdUseCase(user!.id); //id must exits
+  const [postsUpdate, setPostsUpdate] = useState<Post[]>([]);
   const [postsFiltered, setPostFiltered] = useState<Post[]>([]);
   const { t } = useTranslation();
   const [dataChar, setDataChar] = useState<{ data: DataChartColumnsBar[]; sumCountComments: number }>({
@@ -26,17 +27,34 @@ const CrudPostsUser: React.FC = () => {
   useEffect(() => {
     if (!isLoading && !isError && posts) {
       setPostFiltered(posts);
+      setPostsUpdate(posts);
     }
   }, [isError, isLoading, posts]);
 
-  const handleDataChart = (indexPost: number, countComments: number) => {
-    const newDataChar: DataChartColumnsBar = [`Post ${indexPost + 1}: "${posts[indexPost].title}"`, countComments];
+  useEffect(() => {
+    setPostFiltered(postsUpdate);
+  }, [postsUpdate]);
+
+  const handleDataChart = useCallback((indexPost: number, countComments: number, postsUpdate: Post[]) => {
+    const newDataChar: DataChartColumnsBar = [
+      `Post ${indexPost + 1}: "${postsUpdate[indexPost].title}"`,
+      countComments,
+    ];
 
     setDataChar((prevData) => ({
       data: [...prevData.data, newDataChar],
       sumCountComments: prevData.sumCountComments + countComments,
     }));
-  };
+  }, []);
+
+  const addNewDataChart = useCallback((countComments: number, data: Post, totalData: number) => {
+    const newDataChar: DataChartColumnsBar = [`Post ${totalData}: "${data.title}"`, countComments];
+
+    setDataChar((prevData) => ({
+      data: [...prevData.data, newDataChar],
+      sumCountComments: prevData.sumCountComments + countComments,
+    }));
+  }, []);
 
   return (
     <>
@@ -44,12 +62,12 @@ const CrudPostsUser: React.FC = () => {
       <BreadCrumbs data={[{ path: t("breadcrumbs.userPost"), url: ROUTES_PATH.CRUD_POST_USER }]} />
       {!isLoading && !isError && (
         <div className={styles.crudPostsUser}>
-          {posts.length > 0 && (
+          {postsUpdate.length > 0 && (
             <>
               <h1 className={styles.crudPostsUser__title}>{t("crud.statistics.title")}</h1>
               <ChartColumnsBar
                 title={t("crud.statistics.chart.title", {
-                  countPosts: posts.length,
+                  countPosts: postsUpdate.length,
                   countComments: dataChar.sumCountComments,
                 })}
                 yAxisName={t("crud.statistics.chart.yAxisName")}
@@ -58,9 +76,21 @@ const CrudPostsUser: React.FC = () => {
               />
               <h1 className={styles.crudPostsUser__title}>{t("crud.posts.title")}</h1>
               <h2 className={styles.crudPostsUser__title}>{t("crud.new")}</h2>
-              <PostCard key='newPost' id={101} title='' body='' modeEdit={true} existActions={true} isNew={true} />
+              <PostCard
+                key='newPost'
+                id={101}
+                title=''
+                body=''
+                modeEdit={true}
+                existActions={true}
+                isNew={true}
+                onUpdatePosts={(dataPost) => {
+                  setPostsUpdate((prevPosts) => [...prevPosts, dataPost]);
+                  addNewDataChart(0, dataPost, postsUpdate.length + 1);
+                }}
+              />
               <Filter
-                data={posts || []}
+                data={postsUpdate || []}
                 placeHoder='SEARCH A POST...'
                 byFields={["title", "body"]}
                 onDataFiltered={(postsFilter) => setPostFiltered(postsFilter)}
@@ -73,7 +103,7 @@ const CrudPostsUser: React.FC = () => {
                     title={title}
                     body={body}
                     existActions={true}
-                    setCountComments={(count) => handleDataChart(index, count)}
+                    setCountComments={(count) => handleDataChart(index, count, postsUpdate)}
                   />
                 ))}
               </div>

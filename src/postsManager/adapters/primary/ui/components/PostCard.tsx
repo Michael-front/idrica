@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetCommentsByPostIdUsesCase } from "src/postsManager/core/application/usesCases/useGetCommentsByPostIdUsesCase";
 import { useCreatePostUseCase } from "src/postsManager/core/application/usesCases/useCreatePostUsesCase";
+import { ApiResponsePost } from "src/postsManager/infrastructure/api/rtkQueryClient/postsApiRTK";
 
 import * as styles from "./PostCard.module.css";
 
@@ -16,9 +17,19 @@ type PostCardProps = Post & {
   isNew?: boolean;
   existActions?: boolean;
   setCountComments?: (countComments: number) => void;
+  onUpdatePosts?: (post: Post) => void;
 };
 
-const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, isNew }: PostCardProps) => {
+const PostCard = ({
+  id,
+  title,
+  body,
+  existActions,
+  setCountComments,
+  modeEdit,
+  isNew,
+  onUpdatePosts,
+}: PostCardProps) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
   const deletePost = useDeleteByIdUseCase();
@@ -47,15 +58,17 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
   }, [deletePost, id]);
 
   const handleUpdate = useCallback(() => {
-    updatePost({ id, title: editTitle, body: editBody, userId: user?.id });
+    updatePost({ id, title: editTitle, body: editTitle, userId: user?.id });
     setIsModeEditState(false);
-  }, [updatePost, id, user?.id, editTitle, editBody]);
+  }, [updatePost, id, user?.id, editTitle]);
 
   const handleCreate = useCallback(() => {
-    createPost({ id: id, title: "editTitle", body: "editBody", userId: user!.id });
+    const data: ApiResponsePost = { id: id, title: editTitle, body: editTitle, userId: user!.id };
+    createPost(data);
+    onUpdatePosts && onUpdatePosts(data);
     setEditTitle("");
     setEditBody("");
-  }, [createPost, id, user]);
+  }, [createPost, editTitle, id, onUpdatePosts, user]);
 
   return (
     <div key={id} className={styles.card}>
