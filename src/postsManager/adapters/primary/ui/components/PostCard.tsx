@@ -24,6 +24,7 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
   const deletePost = useDeleteByIdUseCase();
   const updatePost = useUpdatePostByIdUseCase();
   const createPost = useCreatePostUseCase();
+  const [isModeEditState, setIsModeEditState] = useState<boolean>(modeEdit || false);
 
   const { comments, isLoading, isError } = useGetCommentsByPostIdUsesCase(id);
   const commentsRef = useRef<number>(0);
@@ -47,6 +48,7 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
 
   const handleUpdate = useCallback(() => {
     updatePost({ id, title: editTitle, body: editBody, userId: user?.id });
+    setIsModeEditState(false);
   }, [updatePost, id, user?.id, editTitle, editBody]);
 
   const handleCreate = useCallback(() => {
@@ -58,7 +60,7 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
   return (
     <div key={id} className={styles.card}>
       <div className={styles.card__details}>
-        {modeEdit ? (
+        {isModeEditState ? (
           <>
             <input
               className={styles.card__title_input}
@@ -80,7 +82,7 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
       </div>
       {existActions && (
         <div className={styles.card__actions}>
-          {modeEdit ? (
+          {isModeEditState ? (
             <Button
               style={{ width: 200 }}
               className={styles["card__action-item"]}
@@ -89,7 +91,11 @@ const PostCard = ({ id, title, body, existActions, setCountComments, modeEdit, i
             />
           ) : (
             <>
-              <Button className={styles["card__action-item"]} label={t("crud.edit")} onClick={handleUpdate} />
+              <Button
+                className={styles["card__action-item"]}
+                label={t("crud.edit")}
+                onClick={() => setIsModeEditState(true)}
+              />
               <Button className={styles["card__action-item"]} label={t("crud.delete")} onClick={handleDelete} />
               <Button
                 className={styles["card__action-item"]}
