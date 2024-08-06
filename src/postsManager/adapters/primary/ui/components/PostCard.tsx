@@ -58,17 +58,19 @@ const PostCard = ({
   }, [deletePost, id]);
 
   const handleUpdate = useCallback(() => {
-    updatePost({ id, title: editTitle, body: editTitle, userId: user?.id });
+    const data: ApiResponsePost = { id: id, title: editTitle, body: editBody, userId: user!.id };
+    updatePost(data);
+    onUpdatePosts && onUpdatePosts(data);
     setIsModeEditState(false);
-  }, [updatePost, id, user?.id, editTitle]);
+  }, [id, editTitle, editBody, user, updatePost, onUpdatePosts]);
 
   const handleCreate = useCallback(() => {
-    const data: ApiResponsePost = { id: id, title: editTitle, body: editTitle, userId: user!.id };
+    const data: ApiResponsePost = { id: id, title: editTitle, body: editBody, userId: user!.id };
     createPost(data);
     onUpdatePosts && onUpdatePosts(data);
     setEditTitle("");
     setEditBody("");
-  }, [createPost, editTitle, id, onUpdatePosts, user]);
+  }, [createPost, editBody, editTitle, id, onUpdatePosts, user]);
 
   return (
     <div key={id} className={styles.card}>

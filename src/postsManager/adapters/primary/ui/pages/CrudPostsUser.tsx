@@ -35,26 +35,28 @@ const CrudPostsUser: React.FC = () => {
     setPostFiltered(postsUpdate);
   }, [postsUpdate]);
 
-  const handleDataChart = useCallback((indexPost: number, countComments: number, postsUpdate: Post[]) => {
-    const newDataChar: DataChartColumnsBar = [
-      `Post ${indexPost + 1}: "${postsUpdate[indexPost].title}"`,
-      countComments,
-    ];
+  const updateDataChart = useCallback(
+    (data: Post[], indexPost: number, action: "add" | "update" | "delete", countComments = 0) => {
+      console.log("edit: ", `Post ${indexPost + 1}: "${data[indexPost].title}"`);
 
-    setDataChar((prevData) => ({
-      data: [...prevData.data, newDataChar],
-      sumCountComments: prevData.sumCountComments + countComments,
-    }));
-  }, []);
+      setDataChar((prevData) => {
+        const newCountComments =
+          action === "add" ? prevData.sumCountComments + countComments : dataChar.data[indexPost][1];
+        const newDataChar: DataChartColumnsBar = [`Post ${indexPost + 1}: "${data[indexPost].title}"`, countComments];
 
-  const addNewDataChart = useCallback((countComments: number, data: Post, totalData: number) => {
-    const newDataChar: DataChartColumnsBar = [`Post ${totalData}: "${data.title}"`, countComments];
+        const updatedData =
+          action === "add"
+            ? [...prevData.data, newDataChar]
+            : [...prevData.data.slice(0, indexPost), newDataChar, ...prevData.data.slice(indexPost + 1)];
 
-    setDataChar((prevData) => ({
-      data: [...prevData.data, newDataChar],
-      sumCountComments: prevData.sumCountComments + countComments,
-    }));
-  }, []);
+        return {
+          data: updatedData,
+          sumCountComments: newCountComments,
+        };
+      });
+    },
+    [dataChar.data],
+  );
 
   return (
     <>
@@ -86,7 +88,7 @@ const CrudPostsUser: React.FC = () => {
                 isNew={true}
                 onUpdatePosts={(dataPost) => {
                   setPostsUpdate((prevPosts) => [...prevPosts, dataPost]);
-                  addNewDataChart(0, dataPost, postsUpdate.length + 1);
+                  updateDataChart([...postsUpdate, dataPost], postsUpdate.length, "add"); //the index is one more [...postsUpdate, dataPost]
                 }}
               />
               <Filter
@@ -103,7 +105,20 @@ const CrudPostsUser: React.FC = () => {
                     title={title}
                     body={body}
                     existActions={true}
-                    setCountComments={(count) => handleDataChart(index, count, postsUpdate)}
+                    setCountComments={(count) => updateDataChart(postsUpdate, index, "add", count)}
+                    onUpdatePosts={(dataPost) => {
+                      let findIndex = 0;
+                      const updatedPostsAux = postsUpdate.map((post, index) => {
+                        if (post.id === dataPost.id) {
+                          findIndex = index;
+                          return { ...post, ...dataPost };
+                        } else {
+                          return post;
+                        }
+                      });
+                      setPostsUpdate(updatedPostsAux);
+                      updateDataChart(updatedPostsAux, findIndex, "update", dataChar.data[findIndex][1]);
+                    }}
                   />
                 ))}
               </div>
