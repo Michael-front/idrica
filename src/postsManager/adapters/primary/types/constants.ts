@@ -1,0 +1,2 @@
+export const BACKGROUND_COLOR_LIGHT = "#35528C";
+export const BACKGROUND_COLOR_DARK = "#0D0D0D";
