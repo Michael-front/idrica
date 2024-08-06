@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Post } from "src/postsManager/core/domain/entities/Post";
 import { useTranslation } from "react-i18next";
@@ -23,6 +23,7 @@ const PostCard = ({ id, title, body, existActions, setCountComments }: PostCardP
   const updatePost = useUpdatePostByIdUseCase();
 
   const { comments, isLoading, isError } = useGetCommentsByPostIdUsesCase(id);
+  const commentsRef = useRef<number>(0);
 
   // const navigate = useNavigate();
 
@@ -32,10 +33,13 @@ const PostCard = ({ id, title, body, existActions, setCountComments }: PostCardP
 
   useEffect(() => {
     if (!isLoading && !isError && comments) {
-      setCountComments && setCountComments(comments.length);
+      const currentCount = comments.length;
+      if (commentsRef.current !== currentCount) {
+        commentsRef.current = currentCount;
+        setCountComments && setCountComments(currentCount);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, isError, comments]);
+  }, [comments, isLoading, isError, setCountComments]);
 
   const handleDelete = useCallback(() => {
     deletePost(id);
