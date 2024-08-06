@@ -53,6 +53,9 @@ const ChartColumnsBar = ({
     tooltip: {
       pointFormat: `${tooltipInitial}: <b>{point.y:.1f} </b>`,
     },
+    accessibility: {
+      enabled: false, // To avoid warning in browser. Not required for test
+    },
     series: [
       {
         type: "column",
