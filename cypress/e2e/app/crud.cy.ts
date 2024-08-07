@@ -17,7 +17,7 @@ describe("Crud Page", () => {
     cy.get('[class*="crudPostsUser__list"] > [class*="card"]').then(($posts) => {
       const initialLength = $posts.length;
 
-      // Desplaza el campo de entrada de título a la vista
+      // scroll to view cardPost to add posts.
       cy.get("[data-testid=edit-title-input]").then(($input) => {
         cy.window().then((win) => {
           win.scrollTo(0, $input[0].offsetTop + 600);
@@ -25,17 +25,37 @@ describe("Crud Page", () => {
         cy.wrap($input).should("be.visible").first().type("New Post Title");
       });
 
-      // Rellena el campo de entrada del cuerpo del post
       cy.get("[data-testid=edit-body-input]").first().type("This is the body of the new post.");
 
-      // Haz clic en el botón de crear post
       cy.get("[data-testid=create-post-button]").click();
 
-      // Paso 2: Verificar que la cantidad de posts ha aumentado en uno
       cy.get('[class*="crudPostsUser__list"] > [class*="card"]').should("have.length", initialLength + 1);
 
-      // Opcional: Verifica que el nuevo post está en la lista
       cy.contains("New Post Title").should("exist");
+    });
+  });
+
+  it("should create a new post", () => {
+    cy.get('[class*="crudPostsUser__list"] > [class*="card"]').then(($posts) => {
+      const initialLength = $posts.length;
+
+      // scroll to view list card posts
+      cy.get("[data-testid=edit-post-button]").then(($input) => {
+        cy.window().then((win) => {
+          win.scrollTo(0, $input[0].offsetTop + 600);
+        });
+        cy.wrap($input).should("be.visible").first().click();
+      });
+
+      cy.get("[data-testid=edit-title-input]").eq(1).clear().type("Edit Title");
+      cy.get("[data-testid=edit-body-input]").eq(1).clear().type("Edit Body");
+
+      cy.get("[data-testid=save-post-button]").click();
+
+      cy.get('[class*="crudPostsUser__list"] > [class*="card"]').should("have.length", initialLength);
+
+      cy.contains("Edit Title").should("exist");
+      cy.contains("Edit Body").should("exist");
     });
   });
 });
