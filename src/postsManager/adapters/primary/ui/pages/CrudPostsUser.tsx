@@ -111,7 +111,7 @@ const CrudPostsUser: React.FC = () => {
             <h2 className={styles.crudPostsUser__title}>{t("crud.new")}</h2>
             <PostCard
               key='newPost'
-              id={101}
+              id={101} //use the same id because the api is fake
               title=''
               body=''
               modeEdit={true}

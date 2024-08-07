@@ -35,3 +35,21 @@
 //     }
 //   }
 // }
+Cypress.Commands.add("saveCookies", () => {
+  cy.getCookie("token").then((cookie) => {
+    if (cookie) {
+      cy.writeFile("cypress/fixtures/cookie.json", {
+        name: cookie.name,
+        value: cookie.value,
+      });
+    }
+  });
+});
+
+Cypress.Commands.add("restoreCookies", () => {
+  cy.readFile("cypress/fixtures/cookie.json").then((cookie) => {
+    if (cookie) {
+      cy.setCookie(cookie.name, cookie.value);
+    }
+  });
+});

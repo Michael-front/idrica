@@ -84,11 +84,13 @@ const PostCard: React.FC<PostCardProps> = ({
         {isModeEditState ? (
           <>
             <input
+              data-testid='edit-title-input'
               className={styles.card__title_input}
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
             />
             <textarea
+              data-testid='edit-body-input'
               className={styles.card__body_input}
               value={editBody}
               onChange={(e) => setEditBody(e.target.value)}
@@ -105,6 +107,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className={styles.card__actions}>
           {isModeEditState ? (
             <Button
+              data-testid={isNew ? "create-post-button" : "save-post-button"}
               style={{ width: 200 }}
               className={styles["card__action-item"]}
               label={isNew ? t("crud.create") : t("crud.save")}
@@ -113,11 +116,17 @@ const PostCard: React.FC<PostCardProps> = ({
           ) : (
             <>
               <Button
+                data-testid='edit-post-button'
                 className={styles["card__action-item"]}
                 label={t("crud.edit")}
                 onClick={() => setIsModeEditState(true)}
               />
-              <Button className={styles["card__action-item"]} label={t("crud.delete")} onClick={handleDelete} />
+              <Button
+                data-testid='delete-post-button'
+                className={styles["card__action-item"]}
+                label={t("crud.delete")}
+                onClick={handleDelete}
+              />
               <Button
                 className={styles["card__action-item"]}
                 label={t("comments.button", { count: comments.length })}

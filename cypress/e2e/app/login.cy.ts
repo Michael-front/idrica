@@ -2,10 +2,6 @@ import { doLogin } from "support/util";
 import { ROUTES_PATH } from "../../../src/postsManager/config/routes/routes";
 
 describe("Login Page", () => {
-  beforeEach(() => {
-    cy.visit(ROUTES_PATH.LOGIN);
-  });
-
   it("should log in successfully with correct credentials via email", () => {
     doLogin("Sincere@april.biz", "1234");
 
