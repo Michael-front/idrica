@@ -50,6 +50,8 @@ Now you're ready to rumble!
 ## Note
 - To avoid re-renders in development mode, you can comment out `React.StrictMode` in `index.tsx`. Although it is normal to wrap the app with `React.StrictMode` in development mode, this will result in one additional re-render.
 
+- I am not strictly following hexagonal architecture since this is just a test.
+
 - According to the [API documentation](https://jsonplaceholder.typicode.com), the data for the POST, UPDATE, PATCH, and DELETE methods are fake, so I can make the request but the real data does not change. The website simulates the changes in CRUD operations, but when the page is reloaded, the changes are not persistent.
 
 - The initial objective set by the test is being met: creating the CRUD for posts using RTK-query and displaying a chart for the logged-in user with all their posts and the number of comments for each post.
