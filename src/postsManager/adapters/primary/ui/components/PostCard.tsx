@@ -6,22 +6,24 @@ import { useDeleteByIdUseCase } from "src/postsManager/core/application/usesCase
 import { useUpdatePostByIdUseCase } from "src/postsManager/core/application/usesCases/useUpdatePostByIdUsesCase";
 import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
-import { useGetCommentsByPostIdUsesCase } from "src/postsManager/core/application/usesCases/useGetCommentsByPostIdUsesCase";
 import { useCreatePostUseCase } from "src/postsManager/core/application/usesCases/useCreatePostUsesCase";
 import { ApiResponsePost } from "src/postsManager/infrastructure/api/rtkQueryClient/postsApiRTK";
 
 import * as styles from "./PostCard.module.css";
 
-type PostCardProps = Post & {
+export type PostCardProps = Post & {
   modeEdit?: boolean;
   isNew?: boolean;
   existActions?: boolean;
   setCountComments?: (countComments: number) => void;
   onUpdatePosts?: (post: Post) => void;
   onDeletePost?: (idPost: number) => void;
+  comments?: Comment[];
+  isLoading?: boolean;
+  isError?: boolean;
 };
 
-const PostCard = ({
+const PostCard: React.FC<PostCardProps> = ({
   id,
   title,
   body,
@@ -31,6 +33,9 @@ const PostCard = ({
   isNew,
   onUpdatePosts,
   onDeletePost,
+  comments = [],
+  isLoading = false,
+  isError = false,
 }: PostCardProps) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
@@ -39,9 +44,7 @@ const PostCard = ({
   const createPost = useCreatePostUseCase();
   const [isModeEditState, setIsModeEditState] = useState<boolean>(modeEdit || false);
 
-  const { comments, isLoading, isError } = useGetCommentsByPostIdUsesCase(id);
   const commentsRef = useRef<number>(0);
-
   const [editTitle, setEditTitle] = useState(title);
   const [editBody, setEditBody] = useState(body);
 

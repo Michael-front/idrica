@@ -10,8 +10,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/postsManager/adapters/secondary/redux/store";
 import { useGetPostByUserIdUseCase } from "src/postsManager/core/application/usesCases/useGetPostsByUserIdUsesCase";
 import ChartColumnsBar, { DataChartColumnsBar } from "@components/ChartColumnsBar";
+import withComments from "@components/WithCommentsHoc";
 
 import * as styles from "./CrudPostsUser.module.css";
+
+const PostCardWithComments = withComments(PostCard);
 
 const CrudPostsUser: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -127,14 +130,14 @@ const CrudPostsUser: React.FC = () => {
             />
             <div className={styles.crudPostsUser__list}>
               {postsFiltered.map(({ id, title, body }, index) => (
-                <PostCard
+                <PostCardWithComments
                   key={id}
                   id={id}
                   title={title}
                   body={body}
                   existActions={true}
-                  setCountComments={(count) => updateDataChart(postsUpdate, index, "add", count)}
-                  onUpdatePosts={(dataPost) => {
+                  setCountComments={(count: number) => updateDataChart(postsUpdate, index, "add", count)}
+                  onUpdatePosts={(dataPost: Post) => {
                     let findIndex = 0;
                     const updatedPostsAux = postsUpdate.map((post, index) => {
                       if (post.id === dataPost.id) {
