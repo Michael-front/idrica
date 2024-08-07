@@ -35,7 +35,7 @@ describe("Crud Page", () => {
     });
   });
 
-  it("should create a new post", () => {
+  it("should edit a post and delete a post", () => {
     cy.get('[class*="crudPostsUser__list"] > [class*="card"]').then(($posts) => {
       const initialLength = $posts.length;
 
@@ -47,6 +47,7 @@ describe("Crud Page", () => {
         cy.wrap($input).should("be.visible").first().click();
       });
 
+      //Edit
       cy.get("[data-testid=edit-title-input]").eq(1).clear().type("Edit Title");
       cy.get("[data-testid=edit-body-input]").eq(1).clear().type("Edit Body");
 
@@ -56,6 +57,10 @@ describe("Crud Page", () => {
 
       cy.contains("Edit Title").should("exist");
       cy.contains("Edit Body").should("exist");
+
+      //delete:
+      cy.get("[data-testid=delete-post-button]").first().click();
+      cy.get('[class*="crudPostsUser__list"] > [class*="card"]').should("have.length", initialLength - 1);
     });
   });
 });
