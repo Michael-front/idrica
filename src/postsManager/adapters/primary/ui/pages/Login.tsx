@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                   />
                 </div>
               </div>
-              <Button label={t("login.button")} />
+              <Button data-testid='login-button' label={t("login.button")} type='submit' />
             </form>
           </div>
         </div>
