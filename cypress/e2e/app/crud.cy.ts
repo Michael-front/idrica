@@ -13,7 +13,7 @@ describe("Crud Page", () => {
 
   it("should create a new post", () => {
     // cy.getCookie("token").should("exist");
-
+    cy.intercept("POST", "https://jsonplaceholder.typicode.com/posts").as("createPost");
     cy.get('[class*="crudPostsUser__list"] > [class*="card"]').then(($posts) => {
       const initialLength = $posts.length;
 
@@ -32,10 +32,15 @@ describe("Crud Page", () => {
       cy.get('[class*="crudPostsUser__list"] > [class*="card"]').should("have.length", initialLength + 1);
 
       cy.contains("New Post Title").should("exist");
+
+      cy.wait("@createPost").its("response.statusCode").should("eq", 201);
     });
   });
 
   it("should edit a post and delete a post", () => {
+    cy.intercept("PATCH", "https://jsonplaceholder.typicode.com/posts/1").as("updatePost");
+    cy.intercept("DELETE", "https://jsonplaceholder.typicode.com/posts/1").as("deletePost");
+
     cy.get('[class*="crudPostsUser__list"] > [class*="card"]').then(($posts) => {
       const initialLength = $posts.length;
 
@@ -58,9 +63,12 @@ describe("Crud Page", () => {
       cy.contains("Edit Title").should("exist");
       cy.contains("Edit Body").should("exist");
 
+      cy.wait("@updatePost").its("response.statusCode").should("eq", 200);
+
       //delete:
       cy.get("[data-testid=delete-post-button]").first().click();
       cy.get('[class*="crudPostsUser__list"] > [class*="card"]').should("have.length", initialLength - 1);
+      cy.wait("@deletePost").its("response.statusCode").should("eq", 200);
     });
   });
 });
