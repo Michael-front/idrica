@@ -38,8 +38,9 @@ const Filter = <T extends Record<string, any>>({ data, placeHoder, byFields, onD
       <div className={styles.filter__top}>
         <img className={styles.filter__icon} src={IconSearch} />
         <input
+          data-testid='filter-search'
           type='text'
-          className={styles.filter__sarch}
+          className={styles.filter__search}
           placeholder={placeHoder}
           onChange={(event) => handleFilter(event.target.value)}
         />

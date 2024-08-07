@@ -20,7 +20,7 @@
   width: 12px;
 }
 
-.filter__sarch {
+.filter__search {
   margin-left: 8px;
   height: 27px;
   border: none;
@@ -51,9 +51,9 @@
   color: var(--secondary-color);
 }
 
-.filter__sarch:hover,
-.filter__sarch:focus,
-.filter__sarch:active {
+.filter__search:hover,
+.filter__search:focus,
+.filter__search:active {
   outline: none;
   text-decoration: none;
 }
