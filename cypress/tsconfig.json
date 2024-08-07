@@ -1,9 +1,24 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "lib": ["es5", "dom"],
-      "types": ["cypress"]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/postsManager/adapters/primary/ui/assets/*"],
+      "@components/*": ["src/postsManager/adapters/primary/ui/components/*"],
     },
-    "include": ["**/*.ts"]
-  }
-  
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "../src/**/*.ts",
+    "../src/**/*.tsx",
+    "**/*.ts"
+  ],
+  "exclude": ["../node_modules"]
+}
