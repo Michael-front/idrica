@@ -68,7 +68,9 @@ const Header = ({ isLoading }: HeaderProps) => {
             {isOpenDropDownMenuUser && (
               <div className={style["header__user-dropdown-menu"]}>
                 <Link to={ROUTES_PATH.SETTINGS}>{t("header.user.config")}</Link>
-                <a onClick={handleLogout}>{t("header.user.logout")}</a>
+                <a data-testid='logout' onClick={handleLogout}>
+                  {t("header.user.logout")}
+                </a>
               </div>
             )}
           </div>

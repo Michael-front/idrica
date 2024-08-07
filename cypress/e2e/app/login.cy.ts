@@ -27,4 +27,19 @@ describe("Login Page", () => {
 
     cy.url().should("include", ROUTES_PATH.LOGIN);
   });
+
+  it("should log out successfully", () => {
+    doLogin("Bret", "1234");
+
+    cy.url().should("include", ROUTES_PATH.HOME);
+    cy.get('[class*="header"]').should("contain", "Bret");
+
+    cy.get('[class*="header__user-menu"]').click();
+    cy.get('[class*="header__user-dropdown-menu"]').should("be.visible");
+
+    cy.get('[data-testid="logout"]').click();
+
+    cy.get('[class*="header"]').should("not.contain", "Bret");
+    cy.get('[class*="header__login"]').should("be.visible");
+  });
 });
