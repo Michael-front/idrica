@@ -9,16 +9,22 @@ Mini web application with TypeScript, cypress, jest, react library test, css mod
   <dd>Listing 100 posts from (<a href="https://jsonplaceholder.typicode.com/posts">posts</a>)</dd>
   <dd>Posts can be filtered by title or body</dd>
 
+  <img src="docs\images\home.png" alt="Descripción de la imagen" height="600" width="400"/>
+
   <dt>Login Page</dt>
-  <dd>The user can log in with any user from the <a href="https://jsonplaceholder.typicode.com/users">Users API</a></dd>
-  <dd>For example, with user "Bret" and password "1234"</dd>
+  <dd>The user can log in with any user from the <a href="https://jsonplaceholder.typicode.com/users">Users API</a> (user or email)</dd>
+  <dd>For example, with user "Bret" and password "1234" (all the users have like password "1234")</dd>
   <dd>The token is saved in a cookie (js-cookie), but this token is fake since the API does not generate a session token</dd>
   <dd>When the user is logged in, they can change the page theme or language</dd>
   <dd>When the user is logged in, a new option appears in the menu (header) to manage CRUD posts</dd>
 
+  <img src="docs\images\login.png" alt="Descripción de la imagen" height="600" width="400"/>
+
   <dt>CRUD Page</dt>
   <dd>The user can see their statistics (total posts and the sum of comments) via a bar graph</dd>
   <dd>Options exist to create, update, and delete a post</dd>
+
+  <img src="docs\images\crud.png" alt="Descripción de la imagen" height="600" width="400"/>
 
   <dt>API Documentation</dt>
   <dd><a href="https://jsonplaceholder.typicode.com/">https://jsonplaceholder.typicode.com</a></dd>
@@ -41,7 +47,7 @@ Now you're ready to rumble!
 
 
 ## Documentation
-- [Your app](docs/app.md): Technologies and Architecture used
+- [app](docs/app.md): Technologies and Architecture used
 - [**Commands**](docs/commands.md): Commands for podcasts web application
 - [Styling](docs/css.md): How to work with the CSS
 - [Testing](docs/testing.md): How to work with your test.
