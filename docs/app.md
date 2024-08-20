@@ -28,7 +28,7 @@ For routing, we use [`react-router-dom`] to manage ours rutes:
 
 ## Jest for the test
 
-- see [Testing](docs/testing.md)
+- see [Testing](../docs/testing.md)
 
 ## Prettier and esLint using with visual studio code (VSC)
 
@@ -197,3 +197,15 @@ According to `vertical slicing`, I am using the directory `postManager` with the
         │
         └───utils
 ```
+
+
+I tried to use the port-adapter pattern for the RTK-query API (**postApiRTK**). However, since it already provides its own hooks, I decided to take advantage of them, so I'm not using classes to implement the interface for the ports (**postManagerApiPort**) and am instead using hooks.
+
+Since there's no need to adapt any data, using this pattern here seems somewhat overly complicated. It would be more practical to use the hooks provided by postApiRTK directly.
+
+For all these reasons, I mention in the readme notes that I'm not strictly following hexagonal architecture.
+
+
+
+
+

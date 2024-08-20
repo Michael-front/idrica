@@ -19,5 +19,5 @@ Testing your application is a vital part of serious development. There are a few
 
 
 ## know more
-See the file configuration in the root path:  `jest.config.js` and view the past for test [**Commands**](docs/commands.md): Commands for podcasts web application
+See the file configuration in the root path:  `jest.config.js` and view the path for test [**Commands**](../docs/commands.md)
 
