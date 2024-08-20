@@ -9,7 +9,7 @@ Mini web application with TypeScript, cypress, jest, react library test, css mod
   <dd>Listing 100 posts from (<a href="https://jsonplaceholder.typicode.com/posts">posts</a>)</dd>
   <dd>Posts can be filtered by title or body</dd>
 
-  <img src="docs\images\home.png" alt="Descripción de la imagen" height="800" width="1200"/>
+  <img src="docs\images\home.png" alt="Descripción de la imagen" />
 
   <dt>Login Page</dt>
   <dd>The user can log in with any user from the <a href="https://jsonplaceholder.typicode.com/users">Users API</a> (user or email)</dd>
@@ -18,13 +18,13 @@ Mini web application with TypeScript, cypress, jest, react library test, css mod
   <dd>When the user is logged in, they can change the page theme or language</dd>
   <dd>When the user is logged in, a new option appears in the menu (header) to manage CRUD posts</dd>
 
-  <img src="docs\images\login.png" alt="Descripción de la imagen" height="600" width="1200"/>
+  <img src="docs\images\login.png" alt="Descripción de la imagen" />
 
   <dt>CRUD Page</dt>
   <dd>The user can see their statistics (total posts and the sum of comments) via a bar graph</dd>
   <dd>Options exist to create, update, and delete a post</dd>
 
-  <img src="docs\images\crud.png" alt="Descripción de la imagen" height="800" width="1200"/>
+  <img src="docs\images\crud.png" alt="Descripción de la imagen" />
 
   <dt>Configuration (visible with login)</dt>
   <dd>On this page, you can change the theme or the language.</dd>
