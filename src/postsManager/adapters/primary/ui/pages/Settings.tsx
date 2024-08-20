@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ROUTES_PATH } from "src/postsManager/config/routes/routes";
 import Header from "@components/Header";
@@ -24,6 +24,8 @@ const Settings: React.FC = () => {
     },
     [i18n],
   );
+
+  const isSpanish: boolean = useMemo(() => i18n.language === "es-ES" || i18n.language === "es", [i18n.language]);
 
   return (
     <>
@@ -55,7 +57,7 @@ const Settings: React.FC = () => {
               name='language'
               value='en'
               onChange={handleLanguageChange}
-              checked={i18n.language === "en"}
+              checked={!isSpanish}
             />
             <label htmlFor='english'>{t("settings.language.english")}</label>
             <input
@@ -64,7 +66,7 @@ const Settings: React.FC = () => {
               name='language'
               value='es'
               onChange={handleLanguageChange}
-              checked={i18n.language === "es"}
+              checked={isSpanish}
             />
             <label htmlFor='spanish'>{t("settings.language.spanish")}</label>
           </div>

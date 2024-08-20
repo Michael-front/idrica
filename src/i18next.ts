@@ -20,6 +20,7 @@ i18next
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],
     },
+    load: "languageOnly",
   });
 
 export default i18next;
