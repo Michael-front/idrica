@@ -52,7 +52,7 @@ Now you're ready to rumble!
 
 
 ## Documentation
-- [app](docs/app.md): Technologies and Architecture used
+- [App](docs/app.md): Technologies and Architecture used
 - [**Commands**](docs/commands.md): Commands for podcasts web application
 - [Styling](docs/css.md): How to work with the CSS
 - [Testing](docs/testing.md): How to work with your test.
