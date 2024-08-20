@@ -29,6 +29,8 @@ Mini web application with TypeScript, cypress, jest, react library test, css mod
   <dt>Configuration (visible with login)</dt>
   <dd>On this page, you can change the theme or the language.</dd>
 
+  <img src="docs\images\settings.png" alt="Descripción de la imagen"/>
+
   <dt>API Documentation</dt>
   <dd><a href="https://jsonplaceholder.typicode.com/">https://jsonplaceholder.typicode.com</a></dd>
 </dl>
